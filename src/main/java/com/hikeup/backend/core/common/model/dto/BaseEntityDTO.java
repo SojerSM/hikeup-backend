@@ -1,6 +1,6 @@
-package com.hikeup.backend.core.common.model.entity;
+package com.hikeup.backend.core.common.model.dto;
 
-import jakarta.persistence.*;
+import jakarta.persistence.MappedSuperclass;
 
 import java.time.LocalDateTime;
 
@@ -8,19 +8,13 @@ import java.time.LocalDateTime;
  * Project: hikeup-backend
  *
  * @author : sojer
- * @since : 11.01.2024
+ * @since : 12.01.2024
  **/
 @MappedSuperclass
-public abstract class BaseEntity {
+public class BaseEntityDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @Temporal(value = TemporalType.TIMESTAMP)
     private LocalDateTime createdDate;
-
-    @Temporal(value = TemporalType.TIMESTAMP)
     private LocalDateTime updatedDate;
 
     public long getId() {

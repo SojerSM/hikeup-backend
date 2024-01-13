@@ -28,18 +28,13 @@ public class AccountController {
     }
 
     @GetMapping
-    public List<AccountResponseDTO> findAll() {
-        return accountService.findAll();
+    public List<AccountResponseDTO> findAll(@RequestParam(required = false) String username) {
+        return accountService.findAll(username);
     }
 
     @GetMapping("/{id}")
     public AccountResponseDTO findById(@PathVariable("id") long id) {
         return accountService.findById(id);
-    }
-
-    @GetMapping("/{username}")
-    public AccountResponseDTO findByUsername(@PathVariable("username") String username) {
-        return accountService.findByUsername(username);
     }
 
     @PostMapping

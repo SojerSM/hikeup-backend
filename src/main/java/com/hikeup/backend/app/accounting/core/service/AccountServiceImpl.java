@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,20 +32,26 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<AccountResponseDTO> findAll() {
-        return accountRepository.findAll().stream()
-                .map(accountMapper::map)
-                .collect(Collectors.toList());
+    public List<AccountResponseDTO> findAll(String username) {
+        List<AccountResponseDTO> results;
+
+        if (username != null) {
+            results = accountRepository.findAll().stream()
+                    .filter(account -> account.getUsername().equals(username))
+                    .map(accountMapper::map)
+                    .collect(Collectors.toList());
+        } else {
+            results = accountRepository.findAll().stream()
+                    .map(accountMapper::map)
+                    .collect(Collectors.toList());
+        }
+
+        return results;
     }
 
     @Override
     public AccountResponseDTO findById(long id) {
         return accountMapper.map(accountRepository.findById(id).orElseThrow(null));
-    }
-
-    @Override
-    public AccountResponseDTO findByUsername(String username) {
-        return accountMapper.map(accountRepository.findByUsername(username).orElseThrow(null));
     }
 
     @Override

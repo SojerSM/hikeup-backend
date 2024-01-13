@@ -14,8 +14,7 @@ import java.util.List;
  **/
 public interface AccountService {
 
-    List<AccountResponseDTO> findAll();
+    List<AccountResponseDTO> findAll(String username);
     AccountResponseDTO findById(long id);
-    AccountResponseDTO findByUsername(String username);
     ResponseEntity<?> create(AccountDTO accountDTO);
 }

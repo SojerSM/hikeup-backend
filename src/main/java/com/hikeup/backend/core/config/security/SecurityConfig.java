@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +22,7 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import static com.hikeup.backend.core.config.rest.RestEndpoints.ACCOUNT_BASE;
 import static com.hikeup.backend.core.config.rest.RestEndpoints.API_URL;
 
 /**
@@ -52,11 +54,12 @@ public class SecurityConfig {
                     configuration.setMaxAge(Duration.of(1L, ChronoUnit.HOURS));
                     return configuration;
                 }))
-                .authenticationProvider(authenticationProvider)
                 .authorizeHttpRequests(requests ->
                         requests
-                                .anyRequest().permitAll())
-                .formLogin(Customizer.withDefaults());
+                                .requestMatchers(ACCOUNT_BASE + "/authenticate",
+                                        ACCOUNT_BASE + "/register").permitAll()
+                                .anyRequest().authenticated())
+                .authenticationProvider(authenticationProvider);
 
         return http.build();
     }

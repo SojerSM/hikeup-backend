@@ -1,20 +1,15 @@
 package com.hikeup.backend.app.accounting.core.model.dto;
 
-import com.hikeup.backend.app.accounting.core.model.entity.Role;
-
-import java.util.List;
-
 /**
  * Project: hikeup-backend
  *
  * @author : sojer
- * @since : 12.01.2024
+ * @since : 13.01.2024
  **/
-public class AccountRequestDTO {
+public class AccountAuthRequestDTO {
 
     private String username;
     private String password;
-    private List<Role> roles;
 
     public String getUsername() {
         return username;
@@ -30,13 +25,5 @@ public class AccountRequestDTO {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
     }
 }

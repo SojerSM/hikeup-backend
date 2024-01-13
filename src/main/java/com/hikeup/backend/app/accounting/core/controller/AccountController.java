@@ -1,7 +1,7 @@
 package com.hikeup.backend.app.accounting.core.controller;
 
 import com.hikeup.backend.app.accounting.api.AccountService;
-import com.hikeup.backend.app.accounting.core.model.dto.AccountRequestDTO;
+import com.hikeup.backend.app.accounting.core.model.dto.AccountDTO;
 import com.hikeup.backend.app.accounting.core.model.dto.AccountResponseDTO;
 import com.hikeup.backend.app.accounting.core.service.AccountServiceImpl;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +28,8 @@ public class AccountController {
     }
 
     @GetMapping
-    public List<AccountResponseDTO> findAll() {
-        return accountService.findAll();
+    public List<AccountResponseDTO> findAll(@RequestParam(required = false) String username) {
+        return accountService.findAll(username);
     }
 
     @GetMapping("/{id}")
@@ -37,13 +37,8 @@ public class AccountController {
         return accountService.findById(id);
     }
 
-    @GetMapping("/{username}")
-    public AccountResponseDTO findByUsername(@PathVariable("username") String username) {
-        return accountService.findByUsername(username);
-    }
-
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody AccountRequestDTO account) {
+    public ResponseEntity<?> create(@RequestBody AccountDTO account) {
         return accountService.create(account);
     }
 }

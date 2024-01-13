@@ -1,15 +1,15 @@
 package com.hikeup.backend.app.accounting.core.service;
 
 import com.hikeup.backend.app.accounting.api.AccountService;
-import com.hikeup.backend.app.accounting.core.model.dto.AccountRequestDTO;
+import com.hikeup.backend.app.accounting.core.model.dto.AccountDTO;
 import com.hikeup.backend.app.accounting.core.model.dto.AccountResponseDTO;
 import com.hikeup.backend.app.accounting.core.model.mapper.AccountMapper;
 import com.hikeup.backend.app.accounting.core.repository.AccountRepository;
-import com.hikeup.backend.app.accounting.core.model.entity.Account;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,10 +32,21 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<AccountResponseDTO> findAll() {
-        return accountRepository.findAll().stream()
-                .map(accountMapper::map)
-                .collect(Collectors.toList());
+    public List<AccountResponseDTO> findAll(String username) {
+        List<AccountResponseDTO> results;
+
+        if (username != null) {
+            results = accountRepository.findAll().stream()
+                    .filter(account -> account.getUsername().equals(username))
+                    .map(accountMapper::map)
+                    .collect(Collectors.toList());
+        } else {
+            results = accountRepository.findAll().stream()
+                    .map(accountMapper::map)
+                    .collect(Collectors.toList());
+        }
+
+        return results;
     }
 
     @Override
@@ -44,12 +55,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountResponseDTO findByUsername(String username) {
-        return accountMapper.map(accountRepository.findByUsername(username).orElseThrow(null));
-    }
-
-    @Override
-    public ResponseEntity<?> create(AccountRequestDTO account) {
+    public ResponseEntity<?> create(AccountDTO account) {
         accountRepository.save(accountMapper.map(account));
 
         return ResponseEntity.status(HttpStatus.CREATED).build();

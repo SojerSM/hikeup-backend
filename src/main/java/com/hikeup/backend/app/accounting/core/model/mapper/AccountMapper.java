@@ -1,7 +1,7 @@
 package com.hikeup.backend.app.accounting.core.model.mapper;
 
 import com.hikeup.backend.app.accounting.core.model.dto.AccountResponseDTO;
-import com.hikeup.backend.app.accounting.core.model.dto.AccountRequestDTO;
+import com.hikeup.backend.app.accounting.core.model.dto.AccountDTO;
 import com.hikeup.backend.app.accounting.core.model.entity.Account;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,7 @@ public class AccountMapper {
         return mapped;
     }
 
-    public Account map(AccountRequestDTO requested) {
+    public Account map(AccountDTO requested) {
         Account account = new Account();
         account.setUsername(requested.getUsername());
         account.setPassword(requested.getPassword());

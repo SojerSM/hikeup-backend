@@ -23,6 +23,10 @@ public class Role extends BaseEntity {
     public Role() {
     }
 
+    public Role(Authority authority) {
+        this.authority = authority;
+    }
+
     public Authority getAuthority() {
         return authority;
     }

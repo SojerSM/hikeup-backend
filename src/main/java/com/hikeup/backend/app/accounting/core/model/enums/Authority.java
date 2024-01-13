@@ -1,4 +1,4 @@
-package com.hikeup.backend.app.accounting.model.enums;
+package com.hikeup.backend.app.accounting.core.model.enums;
 
 /**
  * Project: hikeup-backend

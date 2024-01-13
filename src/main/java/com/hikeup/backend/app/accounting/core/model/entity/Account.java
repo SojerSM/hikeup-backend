@@ -1,4 +1,4 @@
-package com.hikeup.backend.app.accounting.model.entity;
+package com.hikeup.backend.app.accounting.core.model.entity;
 
 import com.hikeup.backend.core.common.model.entity.BaseEntity;
 import jakarta.persistence.*;

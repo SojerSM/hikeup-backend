@@ -1,6 +1,6 @@
-package com.hikeup.backend.app.accounting.model.entity;
+package com.hikeup.backend.app.accounting.core.model.entity;
 
-import com.hikeup.backend.app.accounting.model.enums.Authority;
+import com.hikeup.backend.app.accounting.core.model.enums.Authority;
 import com.hikeup.backend.core.common.model.entity.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

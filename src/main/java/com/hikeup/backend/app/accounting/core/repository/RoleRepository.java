@@ -1,6 +1,6 @@
-package com.hikeup.backend.app.accounting.repository;
+package com.hikeup.backend.app.accounting.core.repository;
 
-import com.hikeup.backend.app.accounting.model.entity.Role;
+import com.hikeup.backend.app.accounting.core.model.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

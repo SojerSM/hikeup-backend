@@ -1,6 +1,6 @@
-package com.hikeup.backend.app.accounting.model.dto;
+package com.hikeup.backend.app.accounting.core.model.dto;
 
-import com.hikeup.backend.app.accounting.model.enums.Authority;
+import com.hikeup.backend.app.accounting.core.model.enums.Authority;
 import com.hikeup.backend.core.common.model.dto.BaseEntityDTO;
 
 /**

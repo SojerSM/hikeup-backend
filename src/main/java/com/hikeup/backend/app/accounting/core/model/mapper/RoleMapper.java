@@ -1,7 +1,7 @@
-package com.hikeup.backend.app.accounting.model.mapper;
+package com.hikeup.backend.app.accounting.core.model.mapper;
 
-import com.hikeup.backend.app.accounting.model.dto.RoleResponseDTO;
-import com.hikeup.backend.app.accounting.model.entity.Role;
+import com.hikeup.backend.app.accounting.core.model.entity.Role;
+import com.hikeup.backend.app.accounting.core.model.dto.RoleResponseDTO;
 import org.springframework.stereotype.Service;
 
 /**

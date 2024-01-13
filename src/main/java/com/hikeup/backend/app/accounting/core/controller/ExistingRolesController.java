@@ -1,7 +1,8 @@
-package com.hikeup.backend.app.accounting.controller;
+package com.hikeup.backend.app.accounting.core.controller;
 
-import com.hikeup.backend.app.accounting.model.dto.RoleResponseDTO;
-import com.hikeup.backend.app.accounting.service.RoleService;
+import com.hikeup.backend.app.accounting.api.RoleService;
+import com.hikeup.backend.app.accounting.core.model.dto.RoleResponseDTO;
+import com.hikeup.backend.app.accounting.core.service.RoleServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,7 @@ public class ExistingRolesController {
 
     private final RoleService roleService;
 
-    public ExistingRolesController(RoleService roleService) {
+    public ExistingRolesController(RoleServiceImpl roleService) {
         this.roleService = roleService;
     }
 

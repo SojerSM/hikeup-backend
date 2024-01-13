@@ -35,6 +35,11 @@ public class AccountController {
         return accountService.findById(id);
     }
 
+    @GetMapping("/{username}")
+    public AccountResponseDTO findByUsername(@PathVariable("username") String username) {
+        return accountService.findByUsername(username);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody AccountRequestDTO account) {
         return accountService.create(account);

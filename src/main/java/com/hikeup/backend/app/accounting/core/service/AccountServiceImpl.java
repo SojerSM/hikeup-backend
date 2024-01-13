@@ -44,6 +44,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public AccountResponseDTO findByUsername(String username) {
+        return accountMapper.map(accountRepository.findByUsername(username).orElseThrow(null));
+    }
+
+    @Override
     public ResponseEntity<?> create(AccountRequestDTO account) {
         accountRepository.save(accountMapper.map(account));
 

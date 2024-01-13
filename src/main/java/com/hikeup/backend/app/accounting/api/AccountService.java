@@ -16,5 +16,6 @@ public interface AccountService {
 
     List<AccountResponseDTO> findAll();
     AccountResponseDTO findById(long id);
+    AccountResponseDTO findByUsername(String username);
     ResponseEntity<?> create(AccountRequestDTO accountRequestDTO);
 }

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.hikeup.backend.core.config.rest.RestEndpoints.ACCOUNT_BASE;
+
 /**
  * Project: hikeup-backend
  *
@@ -16,7 +18,7 @@ import java.util.List;
  * @since : 13.01.2024
  **/
 @RestController
-@RequestMapping("/hikeup/api/v1/account")
+@RequestMapping(ACCOUNT_BASE)
 public class AccountController {
 
     private final AccountService accountService;

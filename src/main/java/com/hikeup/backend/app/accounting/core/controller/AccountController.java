@@ -1,0 +1,42 @@
+package com.hikeup.backend.app.accounting.core.controller;
+
+import com.hikeup.backend.app.accounting.api.AccountService;
+import com.hikeup.backend.app.accounting.core.model.dto.AccountRequestDTO;
+import com.hikeup.backend.app.accounting.core.model.dto.AccountResponseDTO;
+import com.hikeup.backend.app.accounting.core.service.AccountServiceImpl;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+/**
+ * Project: hikeup-backend
+ *
+ * @author : sojer
+ * @since : 13.01.2024
+ **/
+@RestController
+@RequestMapping("/hikeup/api/v1/account")
+public class AccountController {
+
+    private final AccountService accountService;
+
+    public AccountController(AccountServiceImpl accountService) {
+        this.accountService = accountService;
+    }
+
+    @GetMapping
+    public List<AccountResponseDTO> findAll() {
+        return accountService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public AccountResponseDTO findById(@PathVariable("id") long id) {
+        return accountService.findById(id);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> create(@RequestBody AccountRequestDTO account) {
+        return accountService.create(account);
+    }
+}

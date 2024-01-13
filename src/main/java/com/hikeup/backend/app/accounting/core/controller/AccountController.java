@@ -1,7 +1,7 @@
 package com.hikeup.backend.app.accounting.core.controller;
 
 import com.hikeup.backend.app.accounting.api.AccountService;
-import com.hikeup.backend.app.accounting.core.model.dto.AccountRequestDTO;
+import com.hikeup.backend.app.accounting.core.model.dto.AccountDTO;
 import com.hikeup.backend.app.accounting.core.model.dto.AccountResponseDTO;
 import com.hikeup.backend.app.accounting.core.service.AccountServiceImpl;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +43,7 @@ public class AccountController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody AccountRequestDTO account) {
+    public ResponseEntity<?> create(@RequestBody AccountDTO account) {
         return accountService.create(account);
     }
 }

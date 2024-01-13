@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static com.hikeup.backend.core.config.rest.RestEndpoints.ROLE_BASE;
+
 /**
  * Project: hikeup-backend
  *
@@ -16,7 +18,7 @@ import java.util.List;
  * @since : 11.01.2024
  **/
 @RestController
-@RequestMapping("/hikeup/api/v1/existingRoles")
+@RequestMapping(value =ROLE_BASE)
 public class ExistingRolesController {
 
     private final RoleService roleService;
@@ -25,7 +27,7 @@ public class ExistingRolesController {
         this.roleService = roleService;
     }
 
-    @GetMapping
+    @GetMapping(value = "existingRoles")
     public List<RoleResponseDTO> findAll() {
         return roleService.findAll();
     }

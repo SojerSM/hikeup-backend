@@ -1,5 +1,7 @@
 package com.hikeup.backend.app.accounting.core.model.dto;
 
+import jakarta.validation.constraints.NotEmpty;
+
 /**
  * Project: hikeup-backend
  *
@@ -8,7 +10,9 @@ package com.hikeup.backend.app.accounting.core.model.dto;
  **/
 public class AccountRegisterRequestDTO {
 
+    @NotEmpty
     private String username;
+    @NotEmpty
     private String password;
 
     public String getUsername() {

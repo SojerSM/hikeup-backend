@@ -5,6 +5,7 @@ import com.hikeup.backend.app.accounting.core.model.dto.AccountRegisterRequestDT
 import com.hikeup.backend.app.accounting.core.service.access.AuthenticationService;
 import com.hikeup.backend.app.accounting.core.service.access.RegistrationService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,12 +33,12 @@ public class AccessController {
     }
 
     @PostMapping(value = "/authenticate")
-    public ResponseEntity<String> authenticate(@RequestBody AccountAuthRequestDTO request) {
+    public ResponseEntity<String> authenticate(@RequestBody @Validated AccountAuthRequestDTO request) {
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
     @PostMapping(value = "/register")
-    public ResponseEntity<String> register(@RequestBody AccountRegisterRequestDTO request) {
+    public ResponseEntity<String> register(@RequestBody @Validated AccountRegisterRequestDTO request) {
         return ResponseEntity.ok(registrationService.register(request));
     }
 }

@@ -5,6 +5,7 @@ import com.hikeup.backend.app.accounting.core.model.dto.AccountDTO;
 import com.hikeup.backend.app.accounting.core.model.dto.AccountResponseDTO;
 import com.hikeup.backend.app.accounting.core.model.mapper.AccountMapper;
 import com.hikeup.backend.app.accounting.core.repository.AccountRepository;
+import com.hikeup.backend.core.config.exception.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ import java.util.stream.Collectors;
  **/
 @Service
 public class AccountServiceImpl implements AccountService {
+
+    private static final String USER_NOT_FOUND_MSG = "User not found.";
 
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;
@@ -46,12 +49,17 @@ public class AccountServiceImpl implements AccountService {
                     .collect(Collectors.toList());
         }
 
+        if (results.isEmpty()) {
+            throw new NotFoundException(USER_NOT_FOUND_MSG);
+        }
+
         return results;
     }
 
     @Override
     public AccountResponseDTO findById(long id) {
-        return accountMapper.map(accountRepository.findById(id).orElseThrow(null));
+        return accountMapper.map(accountRepository.findById(id).orElseThrow(
+                () -> new NotFoundException(USER_NOT_FOUND_MSG)));
     }
 
     @Override

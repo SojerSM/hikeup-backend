@@ -1,4 +1,4 @@
-package com.hikeup.backend.core.config.security.util;
+package com.hikeup.backend.core.config.security.config;
 
 import com.hikeup.backend.app.account.core.repository.AccountRepository;
 import org.springframework.context.annotation.Bean;
@@ -18,11 +18,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @since : 13.01.2024
  **/
 @Configuration
-public class SecurityProvider {
+public class AuthConfig {
 
     private final AccountRepository accountRepository;
 
-    public SecurityProvider(AccountRepository accountRepository) {
+    public AuthConfig(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 

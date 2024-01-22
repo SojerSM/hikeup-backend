@@ -1,11 +1,13 @@
 package com.hikeup.backend.core.config.security.config;
 
+import com.hikeup.backend.core.config.security.util.AuthPropertiesProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 
@@ -26,9 +28,12 @@ import static com.hikeup.backend.core.config.rest.RestEndpoints.ACCOUNT_BASE;
 public class SecurityConfig {
 
     private final AuthenticationProvider authenticationProvider;
+    private final AuthPropertiesProvider authPropertiesProvider;
 
-    public SecurityConfig(AuthenticationProvider authenticationProvider) {
+    public SecurityConfig(AuthenticationProvider authenticationProvider,
+                          AuthPropertiesProvider authPropertiesProvider) {
         this.authenticationProvider = authenticationProvider;
+        this.authPropertiesProvider = authPropertiesProvider;
     }
 
     @Bean
@@ -36,19 +41,21 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(request -> {
-                    CorsConfiguration configuration = new CorsConfiguration();
-                    configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:8080"));
-                    configuration.setAllowedMethods(List.of("*"));
-                    configuration.setAllowCredentials(true);
-                    configuration.setAllowedHeaders(List.of("*"));
-                    configuration.setMaxAge(Duration.of(1L, ChronoUnit.HOURS));
-                    return configuration;
+                    CorsConfiguration config = new CorsConfiguration();
+                    config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:8080"));
+                    config.setAllowedMethods(List.of("*"));
+                    config.setAllowCredentials(true);
+                    config.setAllowedHeaders(List.of("*"));
+                    config.setExposedHeaders(List.of(authPropertiesProvider.getAuthHeader()));
+                    config.setMaxAge(Duration.of(1L, ChronoUnit.HOURS));
+                    return config;
                 }))
                 .authorizeHttpRequests(requests ->
                         requests
                                 .requestMatchers(ACCOUNT_BASE + "/authenticate",
                                         ACCOUNT_BASE + "/register", "/h2-console/**").permitAll()
                                 .anyRequest().authenticated())
+                .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider);
 
         return http.build();

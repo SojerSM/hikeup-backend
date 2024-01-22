@@ -11,12 +11,13 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 @ConfigurationProperties(prefix = "jwt")
-public class JwtPropertiesProvider {
+public class AuthPropertiesProvider {
 
     private String secretKey;
     private String accessExpDelay;
     private String refreshExpDelay;
     private String prefix;
+    private String authHeader;
 
     public String getSecretKey() {
         return secretKey;
@@ -31,6 +32,10 @@ public class JwtPropertiesProvider {
     }
 
     public String getPrefix() {
-        return prefix;
+        return prefix.concat(" ");
+    }
+
+    public String getAuthHeader() {
+        return authHeader;
     }
 }

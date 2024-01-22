@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: pglocal
+    active: h2
   jpa:
     properties:
       hibernate:

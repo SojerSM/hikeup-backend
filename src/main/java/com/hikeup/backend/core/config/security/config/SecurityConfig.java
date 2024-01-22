@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(request -> {
                     CorsConfiguration configuration = new CorsConfiguration();
-                    configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+                    configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:8080"));
                     configuration.setAllowedMethods(List.of("*"));
                     configuration.setAllowCredentials(true);
                     configuration.setAllowedHeaders(List.of("*"));
@@ -47,7 +47,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(requests ->
                         requests
                                 .requestMatchers(ACCOUNT_BASE + "/authenticate",
-                                        ACCOUNT_BASE + "/register").permitAll()
+                                        ACCOUNT_BASE + "/register", "/h2-console/**").permitAll()
                                 .anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider);
 

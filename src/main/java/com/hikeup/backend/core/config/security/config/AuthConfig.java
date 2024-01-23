@@ -1,6 +1,7 @@
 package com.hikeup.backend.core.config.security.config;
 
 import com.hikeup.backend.app.account.core.repository.AccountRepository;
+import com.hikeup.backend.core.config.exception.exceptions.NotFoundException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,9 +29,8 @@ public class AuthConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        //FIXME replace runtime exception with custom exception
         return username -> accountRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new NotFoundException("User not found"));
     }
 
     @Bean

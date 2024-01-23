@@ -18,4 +18,4 @@ security:
     access-exp-delay: 90000000
     refresh-exp-delay: 7200000
     prefix: Bearer
-    authHeader: Authorization
+    auth-header: Authorization

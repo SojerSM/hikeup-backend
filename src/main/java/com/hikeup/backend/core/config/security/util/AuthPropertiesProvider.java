@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @since : 20.01.2024
  **/
 @Component
-@ConfigurationProperties(prefix = "jwt")
+@ConfigurationProperties(prefix = "security.jwt")
 public class AuthPropertiesProvider {
 
     private String secretKey;
@@ -23,19 +23,39 @@ public class AuthPropertiesProvider {
         return secretKey;
     }
 
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
+    }
+
     public String getAccessExpDelay() {
         return accessExpDelay;
+    }
+
+    public void setAccessExpDelay(String accessExpDelay) {
+        this.accessExpDelay = accessExpDelay;
     }
 
     public String getRefreshExpDelay() {
         return refreshExpDelay;
     }
 
+    public void setRefreshExpDelay(String refreshExpDelay) {
+        this.refreshExpDelay = refreshExpDelay;
+    }
+
     public String getPrefix() {
-        return prefix.concat(" ");
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
     }
 
     public String getAuthHeader() {
         return authHeader;
+    }
+
+    public void setAuthHeader(String authHeader) {
+        this.authHeader = authHeader;
     }
 }

@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotEmpty;
  * @author : sojer
  * @since : 13.01.2024
  **/
-public class AccountAuthRequestDTO {
+public class AuthRequestDTO {
 
     @NotEmpty
     private String username;

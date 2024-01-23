@@ -41,11 +41,11 @@ public class AccountServiceImpl implements AccountService {
             results = accountRepository.findAll().stream()
                     .filter(account -> account.getUsername().equals(username))
                     .map(accountMapper::map)
-                    .collect(Collectors.toList());
+                    .toList();
         } else {
             results = accountRepository.findAll().stream()
                     .map(accountMapper::map)
-                    .collect(Collectors.toList());
+                    .toList();
         }
 
         if (results.isEmpty()) {

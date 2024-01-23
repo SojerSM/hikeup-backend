@@ -1,7 +1,8 @@
 package com.hikeup.backend.app.account.core.controller;
 
-import com.hikeup.backend.app.account.core.model.dto.AccountAuthRequestDTO;
+import com.hikeup.backend.app.account.core.model.dto.AuthRequestDTO;
 import com.hikeup.backend.app.account.core.model.dto.AccountRegisterRequestDTO;
+import com.hikeup.backend.app.account.core.model.dto.AuthResponseDTO;
 import com.hikeup.backend.app.account.core.service.access.AuthenticationService;
 import com.hikeup.backend.app.account.core.service.access.RegistrationService;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +34,8 @@ public class AccessController {
     }
 
     @PostMapping(value = "/authenticate")
-    public ResponseEntity<String> authenticate(@RequestBody @Validated AccountAuthRequestDTO request) {
-        return ResponseEntity.ok(authenticationService.authenticate(request));
+    public ResponseEntity<AuthResponseDTO> authenticate(@RequestBody @Validated AuthRequestDTO request) {
+        return authenticationService.authenticate(request);
     }
 
     @PostMapping(value = "/register")

@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: pglocal
+    active: h2
   jpa:
     properties:
       hibernate:
@@ -8,7 +8,14 @@ spring:
     hibernate:
       ddl-auto: create
     show-sql: true
-
 logging:
   level:
     org.springframework.security: DEBUG
+
+security:
+  jwt:
+    secret-key: 42f87806eb5e695882afe118505621537eb1ca450d6a074496028209502c3f51
+    access-exp-delay: 900000
+    refresh-exp-delay: 21600000
+    prefix: Bearer
+    auth-header: Authorization

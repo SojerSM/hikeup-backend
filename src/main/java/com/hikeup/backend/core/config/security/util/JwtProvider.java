@@ -43,8 +43,8 @@ public class JwtProvider {
             return Jwts.parser()
                     .setSigningKey(getSignInKey())
                     .build()
-                    .parseClaimsJws(token)
-                    .getBody();
+                    .parseSignedClaims(token)
+                    .getPayload();
         } catch (Exception exc) {
             throw new JwtExpiredOrUntrustedException(exc.getMessage());
         }

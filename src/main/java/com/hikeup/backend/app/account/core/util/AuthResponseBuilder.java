@@ -8,11 +8,11 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 /**
- * Project: arizona-ecuador
+ * Project: hikeup-backend
  *
- * @author: sojer
- * @since: 23.01.2024
- */
+ * @author : sojer
+ * @since : 23.01.2024
+ **/
 @Component
 public class AuthResponseBuilder {
 

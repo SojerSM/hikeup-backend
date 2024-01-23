@@ -1,11 +1,13 @@
 package com.hikeup.backend.core.config.security.service;
 
+import com.hikeup.backend.app.account.core.model.entity.Role;
 import com.hikeup.backend.core.config.security.model.TokenType;
 import com.hikeup.backend.core.config.security.util.AdditionalClaimsBuilder;
 import com.hikeup.backend.core.config.security.util.AuthPropertiesProvider;
 import com.hikeup.backend.core.config.security.util.JwtProvider;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,9 +32,9 @@ public class JwtService {
         this.additionalClaimsBuilder = additionalClaimsBuilder;
     }
 
-    public String generateAccessToken(String username) {
+    public String generateAccessToken(String username, List<Role> roles) {
         String delay = authPropertiesProvider.getAccessExpDelay();
-        Map<String, Object> additionalClaims = additionalClaimsBuilder.build(TokenType.ACCESS);
+        Map<String, Object> additionalClaims = additionalClaimsBuilder.build(TokenType.ACCESS, roles);
         return jwtProvider.generateToken(additionalClaims, username, Long.parseLong(delay));
     }
 

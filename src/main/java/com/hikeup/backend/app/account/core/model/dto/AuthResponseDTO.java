@@ -3,11 +3,11 @@ package com.hikeup.backend.app.account.core.model.dto;
 import java.time.LocalDateTime;
 
 /**
- * Project: arizona-ecuador
+ * Project: hikeup-backend
  *
- * @author: sojer
- * @since: 23.01.2024
- */
+ * @author : sojer
+ * @since : 23.01.2024
+ **/
 public class AuthResponseDTO {
 
     private String accessToken;

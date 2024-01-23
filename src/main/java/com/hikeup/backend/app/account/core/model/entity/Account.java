@@ -81,6 +81,6 @@ public class Account extends BaseEntity implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getAuthority().name()))
-                .collect(Collectors.toList());
+                .toList();
     }
 }

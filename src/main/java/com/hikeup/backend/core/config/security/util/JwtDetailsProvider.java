@@ -20,11 +20,11 @@ import java.util.function.Function;
  * @since : 22.01.2024
  **/
 @Component
-public class JwtProvider {
+public class JwtDetailsProvider {
 
     private final AuthPropertiesProvider authPropertiesProvider;
 
-    public JwtProvider(AuthPropertiesProvider authPropertiesProvider) {
+    public JwtDetailsProvider(AuthPropertiesProvider authPropertiesProvider) {
         this.authPropertiesProvider = authPropertiesProvider;
     }
 
@@ -76,7 +76,7 @@ public class JwtProvider {
         }
     }
 
-    public boolean isTokenValidWithSecretKey(String token) {
+    private boolean isTokenValidWithSecretKey(String token) {
         try {
             extractAllClaims(token);
             return true;

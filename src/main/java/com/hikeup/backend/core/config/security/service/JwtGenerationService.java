@@ -4,7 +4,7 @@ import com.hikeup.backend.app.account.core.model.entity.Role;
 import com.hikeup.backend.core.config.security.model.TokenType;
 import com.hikeup.backend.core.config.security.util.AdditionalClaimsBuilder;
 import com.hikeup.backend.core.config.security.util.AuthPropertiesProvider;
-import com.hikeup.backend.core.config.security.util.JwtProvider;
+import com.hikeup.backend.core.config.security.util.JwtDetailsProvider;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,29 +18,29 @@ import java.util.Map;
  **/
 
 @Service
-public class JwtService {
+public class JwtGenerationService {
 
     private final AuthPropertiesProvider authPropertiesProvider;
-    private final JwtProvider jwtProvider;
+    private final JwtDetailsProvider jwtDetailsProvider;
     private final AdditionalClaimsBuilder additionalClaimsBuilder;
 
-    public JwtService(AuthPropertiesProvider authPropertiesProvider,
-                      JwtProvider jwtProvider,
-                      AdditionalClaimsBuilder additionalClaimsBuilder) {
+    public JwtGenerationService(AuthPropertiesProvider authPropertiesProvider,
+                                JwtDetailsProvider jwtDetailsProvider,
+                                AdditionalClaimsBuilder additionalClaimsBuilder) {
         this.authPropertiesProvider = authPropertiesProvider;
-        this.jwtProvider = jwtProvider;
+        this.jwtDetailsProvider = jwtDetailsProvider;
         this.additionalClaimsBuilder = additionalClaimsBuilder;
     }
 
     public String generateAccessToken(String username, List<Role> roles) {
         String delay = authPropertiesProvider.getAccessExpDelay();
         Map<String, Object> additionalClaims = additionalClaimsBuilder.build(TokenType.ACCESS, roles);
-        return jwtProvider.generateToken(additionalClaims, username, Long.parseLong(delay));
+        return jwtDetailsProvider.generateToken(additionalClaims, username, Long.parseLong(delay));
     }
 
     public String generateRefreshToken(String username) {
         String delay = authPropertiesProvider.getRefreshExpDelay();
         Map<String, Object> additionalClaims = additionalClaimsBuilder.build(TokenType.REFRESH);
-        return jwtProvider.generateToken(additionalClaims, username, Long.parseLong(delay));
+        return jwtDetailsProvider.generateToken(additionalClaims, username, Long.parseLong(delay));
     }
 }

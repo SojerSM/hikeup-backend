@@ -4,10 +4,8 @@ import com.hikeup.backend.app.account.api.AccountService;
 import com.hikeup.backend.app.account.core.model.dto.AccountResponseDTO;
 import com.hikeup.backend.app.account.core.model.dto.AuthRequestDTO;
 import com.hikeup.backend.app.account.core.model.dto.AuthResponseDTO;
-import com.hikeup.backend.app.account.core.model.entity.Account;
-import com.hikeup.backend.app.account.core.model.mapper.AccountMapper;
 import com.hikeup.backend.app.account.core.util.AuthResponseBuilder;
-import com.hikeup.backend.core.config.security.service.JwtService;
+import com.hikeup.backend.core.config.security.service.JwtGenerationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,16 +22,16 @@ import org.springframework.stereotype.Service;
 public class AuthenticationService {
 
     private final AuthenticationManager authenticationManager;
-    private final JwtService jwtService;
+    private final JwtGenerationService jwtGenerationService;
     private final AuthResponseBuilder authResponseBuilder;
     private final AccountService accountService;
 
     public AuthenticationService(AuthenticationManager authenticationManager,
-                                 JwtService jwtService,
+                                 JwtGenerationService jwtGenerationService,
                                  AuthResponseBuilder authResponseBuilder,
                                  AccountService accountService) {
         this.authenticationManager = authenticationManager;
-        this.jwtService = jwtService;
+        this.jwtGenerationService = jwtGenerationService;
         this.authResponseBuilder = authResponseBuilder;
         this.accountService = accountService;
     }
@@ -45,8 +43,8 @@ public class AuthenticationService {
         );
 
         AccountResponseDTO authenticated = accountService.findAll(request.getUsername()).get(0);
-        String accessToken = jwtService.generateAccessToken(request.getUsername(), authenticated.getRoles());
-        String refreshToken = jwtService.generateRefreshToken(request.getUsername());
+        String accessToken = jwtGenerationService.generateAccessToken(request.getUsername(), authenticated.getRoles());
+        String refreshToken = jwtGenerationService.generateRefreshToken(request.getUsername());
 
         return ResponseEntity.status(HttpStatus.OK).body(
                 authResponseBuilder.build(accessToken,refreshToken));
